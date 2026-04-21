@@ -18,7 +18,7 @@ import {
   DialogTrigger,
 } from "@/src/components/ui/dialog";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "@/src/components/ui/input";
 
 const brands = [
   { id: 1, name: "Nike", url: "https://nike.com" },
@@ -29,61 +29,123 @@ const brands = [
 
 export default function BrandsPage() {
   return (
-    <div className="p-8">
+    <div className="min-h-screen bg-slate-50 p-8 font-sans">
       {/* Header */}
-
-      <div className="flex justify-between mb-6">
-        <h1 className="text-2xl font-bold">Brands Management</h1>
+      <div className="flex items-center justify-between mb-8 bg-white p-6 rounded-xl shadow-sm border border-slate-100">
+        <h1 className="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+          Brands Management
+        </h1>
 
         <Dialog>
           <DialogTrigger asChild>
-            <Button>Add Brand</Button>
+            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white shadow-md transition-all">
+              + Add Brand
+            </Button>
           </DialogTrigger>
 
-          <DialogContent>
+          <DialogContent className="sm:max-w-md">
             <DialogHeader>
-              <DialogTitle>Create Brand</DialogTitle>
+              <DialogTitle className="text-xl text-indigo-900">
+                Create New Brand
+              </DialogTitle>
             </DialogHeader>
 
-            <div className="space-y-3">
-              <Input placeholder="Brand name" />
+            <div className="space-y-4 mt-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-700">
+                  Brand Name
+                </label>
+                <Input
+                  placeholder="e.g. Nike"
+                  className="border-slate-300 focus-visible:ring-indigo-500"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-slate-700">
+                  Website URL
+                </label>
+                <Input
+                  placeholder="https://..."
+                  className="border-slate-300 focus-visible:ring-indigo-500"
+                />
+              </div>
 
-              <Input placeholder="Brand url" />
-
-              <Button className="w-full">Save</Button>
+              <Button className="w-full bg-indigo-600 hover:bg-indigo-700 text-white mt-2">
+                Save Brand
+              </Button>
             </div>
           </DialogContent>
         </Dialog>
       </div>
 
       {/* Table */}
-
-      <div className="border rounded-lg">
+      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
         <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>ID</TableHead>
-              <TableHead>Name</TableHead>
-              <TableHead>URL</TableHead>
-              <TableHead className="text-right">Action</TableHead>
+          <TableHeader className="bg-slate-100/50">
+            <TableRow className="hover:bg-transparent">
+              <TableHead className="w-20 font-semibold text-slate-600">
+                ID
+              </TableHead>
+              <TableHead className="font-semibold text-slate-600">
+                Name
+              </TableHead>
+              <TableHead className="font-semibold text-slate-600">
+                URL
+              </TableHead>
+              <TableHead className="text-right font-semibold text-slate-600 pr-6">
+                Actions
+              </TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
             {brands.map((brand) => (
-              <TableRow key={brand.id}>
-                <TableCell>{brand.id}</TableCell>
+              <TableRow
+                key={brand.id}
+                className="hover:bg-indigo-50/50 transition-colors"
+              >
+                <TableCell className="text-slate-500 font-medium">
+                  #{brand.id}
+                </TableCell>
 
-                <TableCell className="font-medium">{brand.name}</TableCell>
+                <TableCell className="font-bold text-slate-800">
+                  {brand.name}
+                </TableCell>
 
-                <TableCell className="text-blue-500">{brand.url}</TableCell>
+                <TableCell>
+                  <a
+                    href={brand.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-indigo-600 hover:text-indigo-800 hover:underline inline-flex items-center gap-1"
+                  >
+                    {brand.url}
+                  </a>
+                </TableCell>
 
-                <TableCell className="text-right space-x-2">
-                  <Button variant="outline" size="sm">
+                <TableCell className="text-right space-x-2 pr-4">
+                  {/* Nút View Mới Thêm */}
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="bg-emerald-50 text-emerald-600 border-emerald-200 hover:bg-emerald-100 hover:text-emerald-800 transition-colors"
+                  >
+                    View
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="bg-amber-50 text-amber-600 border-amber-200 hover:bg-amber-100 hover:text-amber-800 transition-colors"
+                  >
                     Edit
                   </Button>
 
-                  <Button variant="destructive" size="sm">
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    className="bg-rose-50 text-rose-600 border-rose-200 hover:bg-rose-100 hover:text-rose-800 transition-colors shadow-none"
+                  >
                     Delete
                   </Button>
                 </TableCell>
